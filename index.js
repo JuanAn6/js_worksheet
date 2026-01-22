@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     let config = {
         id : 'worksheet',
-        rows: 5, 
-        cols: 5,
+        rows: 100, 
+        cols: 50,
+        stickyRowHeader: false,
+        showRowHeaders: false,
     }
 
     const sheet = new Worksheet(config);

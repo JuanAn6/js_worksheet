@@ -3,10 +3,18 @@ import { Render } from "./render.js";
 
 export class Worksheet {
     
-    constructor({ id = 'worksheet', rows = 0, cols = 0 } = {}) {
-        this.id = id;
-        this.rows = rows;
-        this.cols = cols;
+    constructor(config) {
+        
+        this.id = config.id ?? 'workseet';
+        this.rows = config.rows ?? 10;
+        this.cols = config.cols ?? 10;
+        
+        this.showRowHeaders = config.showRowHeaders ?? true;
+        this.stickyRowHeader = config.stickyRowHeader ?? true;
+        
+        this.showColumnHeaders = config.showColumnHeaders ?? true;
+        this.stickyColumnHeader = config.stickyColumnHeader ?? true;
+        
         this.cells = new Map(); 
     }
 
