@@ -14,6 +14,8 @@ export class Worksheet {
         
         this.showColumnHeaders = config.showColumnHeaders ?? true;
         this.stickyColumnHeader = config.stickyColumnHeader ?? true;
+
+        this.showValueBar = config.showValueBar ?? true;
         
         this.onSelectCell = config.onSelectCell ?? (() => {});
 
@@ -25,6 +27,13 @@ export class Worksheet {
             }
         }
 
+        this.render();
+
+        this.selectedCell = this.cells.get('0:0');
+        console.log(this.selectedCell);
+        this.selectedCell.element.classList.add('selected');
+
+        
     }
 
     _key(row, col) {
@@ -49,7 +58,7 @@ export class Worksheet {
             row : row,
             col : col,
             value : value,
-            sheet : this
+            sheet : this,
         }));
 
         this.rows = Math.max(this.rows, row);
@@ -61,14 +70,11 @@ export class Worksheet {
             throw new Error("row and col must be >= 1");
         }
 
-        this.cells.set(this._key(row, col), new Cell({
-            row : row,
-            col : col,
-            value : value
-        }));
+        const cell = this.cells.get(this._key(row, col));
+        if(cell){
+            cell.setValue(value)
+        }
 
-        this.rows = Math.max(this.rows, row);
-        this.cols = Math.max(this.cols, col);
     }
 
     getCell(row, col) {
@@ -76,6 +82,13 @@ export class Worksheet {
     }
 
     render(){
-        Render.render(this);
+        (new Render()).render(this);
+
+        let _this = this;
+        this.inputValue.addEventListener('input', ()=>{
+            if(!_this.selectedCell) return;
+            _this.selectedCell.element.textContent = _this.inputValue.value; 
+            _this.selectedCell.value = _this.inputValue.value;
+        })
     }
 }

@@ -3,6 +3,10 @@
     color: white;
 } */
 
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .worksheet table{
     border-collapse: collapse;
     width: max-content;
@@ -11,8 +15,8 @@
     overflow: auto;
     width: auto;
 
-    width: 500px;
-    height: 300px;
+    width: 1500px;
+    height: 700px;
     
 }
 
@@ -26,17 +30,24 @@
 
 .worksheet table td{
     border: 1px solid #ccc;
+    overflow: hidden;
     /*
     padding-top: 2px;
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
     */
+
+    position: relative;
+    padding: 0px;
+
 }
 
 .worksheet table td.default-td-sieze{
     width: 64px;
+    max-width: 64px;
     height: 24px;
+    max-height: 24px;
 }
 
 
@@ -66,5 +77,53 @@
 }
 
 .worksheet table td.selected{
-    box-shadow: inset 0 0 0 2px blue;
+    overflow: visible;
+}
+.worksheet table td.selected .cell-content{
+    position: absolute; /* Importante para que el hijo se posicione respecto a la celda */
+    overflow: visible;
+    z-index: 10;
+    top:0px;
+    left:0px;
+    height: 100%;
+    min-width: 100%;
+
+    background-color: white;
+    box-shadow: inset 0 0 0 2px rgb(0, 123, 255);
+}
+
+.worksheet .input-container{
+    width: 300px;
+    border: 1px solid #ededed;
+    display: flex;
+}
+
+.worksheet .input-container .cell-info{
+    display: flex;
+    min-width: 50px;
+    width: 50px;
+    min-width: 22px;
+
+    justify-content: center;
+    align-items: center;
+
+    border-right: 1px solid #ededed;
+    font-size: 0.8em;
+    margin: 5px;
+}
+
+
+.worksheet .input-container .input-value:focus-visible {
+    outline: none;
+}
+.worksheet .input-container .input-value{
+    display: flex;
+    min-width: 50px;
+    width: 100%;
+    min-width: 22px;
+
+    justify-content: center;
+    align-items: center;
+
+    border:none;
 }

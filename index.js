@@ -1,7 +1,6 @@
 import { Worksheet } from "./src/worksheet.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    console.log('start');
 
     let config = {
         id : 'worksheet',
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         showColumnHeaders:true,
         stickyColumnHeader:true,
         onSelectCell : (sheet, cell) => {
-            console.log('outside', cell);
+            // console.log('outside', cell);
         }
     }
 
@@ -23,8 +22,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     sheet.setCell(0, 1, "Edad");
     sheet.setCell(1, 0, "Ana");
     sheet.setCell(1, 1, 30);
-    
-    sheet.render();
 
     console.log(sheet.getCell(1,1));
 
