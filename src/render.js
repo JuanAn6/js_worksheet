@@ -40,6 +40,7 @@ export class Render {
             for (let c = 0; c < worksheet.cols; c++) {
                 const td = document.createElement("td");
                 const cell = worksheet.getCell(r, c);
+                worksheet.setCellElement(r, c, td); //Save the element of the cell
                 td.textContent = cell.value;
                 td.classList.add('default-td-sieze');
                 tr.appendChild(td);

@@ -7,8 +7,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         id : 'worksheet',
         rows: 100, 
         cols: 50,
-        stickyRowHeader: false,
-        showRowHeaders: false,
+
+        stickyRowHeader: true,
+        showRowHeaders: true,
+        showColumnHeaders:true,
+        stickyColumnHeader:true,
+        onSelectCell : (sheet, cell) => {
+            console.log('outside', cell);
+        }
     }
 
     const sheet = new Worksheet(config);
@@ -19,5 +25,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     sheet.setCell(1, 1, 30);
     
     sheet.render();
+
+    console.log(sheet.getCell(1,1));
+
+    
 
 });
