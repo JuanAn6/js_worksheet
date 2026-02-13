@@ -30,7 +30,6 @@ export class Worksheet {
         this.render();
 
         this.selectedCell = this.cells.get('0:0');
-        console.log(this.selectedCell);
         this.selectedCell.element.classList.add('selected');
 
         

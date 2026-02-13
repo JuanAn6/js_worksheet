@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     sheet.setCell(1, 0, "Ana");
     sheet.setCell(1, 1, 30);
 
-    console.log(sheet.getCell(1,1));
+    // console.log(sheet.getCell(1,1));
 
     
 
