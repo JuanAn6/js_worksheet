@@ -52,6 +52,7 @@ export class Cell {
             _this.element.focus();
         }else{
             _this.element.contentEditable = 'false';
+            _this.setValue(_this.element.textContent);
         }
         //Input method
         /*
@@ -75,6 +76,7 @@ export class Cell {
     }
 
     _handleCellContetChange(){
+        let _this = this;
         _this.sheet.inputValue.value = _this.element.textContent;
     }
 
