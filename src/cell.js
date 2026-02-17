@@ -13,22 +13,27 @@ export class Cell {
         let _this = this;
         this.element = element;
         this.element.parentElement.addEventListener('click',()=>{
-            if(_this.sheet.selectedCell == _this) return;
-            
-            _this.sheet.selectedCell.toggleActive(false);
-
-            let items = Array.from(document.querySelectorAll('.worksheet table td.selected'));
-            for(let i = 0; i < items.length; i++){
-                items[i].classList.remove('selected');
-            }
-
-            _this.element.parentElement.classList.add('selected');
-            _this.sheet.selectedCell = _this;
-            _this.sheet.inputValue.value = _this.value;
-            _this.toggleActive(true);
-            _this.sheet.cellInfo.textContent = columnNumberToLetter(_this.col+1)+''+(_this.row+1);
-            _this.sheet.onSelectCell(this.sheet, _this);
+            _this._selectCell()
         });
+    }
+
+    _selectCell(){
+        let _this = this;
+        if(_this.sheet.selectedCell == _this) return;
+            
+        _this.sheet.selectedCell.toggleActive(false);
+
+        let items = Array.from(document.querySelectorAll('.worksheet table td.selected'));
+        for(let i = 0; i < items.length; i++){
+            items[i].classList.remove('selected');
+        }
+
+        _this.element.parentElement.classList.add('selected');
+        _this.sheet.selectedCell = _this;
+        _this.sheet.inputValue.value = _this.value;
+        _this.toggleActive(true);
+        _this.sheet.cellInfo.textContent = columnNumberToLetter(_this.col+1)+''+(_this.row+1);
+        _this.sheet.onSelectCell(this.sheet, _this);
     }
 
     setValue(value){
@@ -41,9 +46,8 @@ export class Cell {
         // Contenteditable method
         if(active){
             _this.element.contentEditable = 'true';
-            _this.element.addEventListener("input", () => {
-                _this.sheet.inputValue.value = _this.element.textContent;
-            });
+            _this.element.addEventListener("keydown", (evt) => { _this._handleCellKeyDownChange(evt); });
+            _this.element.addEventListener("input", () => { _this._handleCellContetChange(); });
             _this.element.classList.add('inside_cell_input');
             _this.element.focus();
         }else{
@@ -68,6 +72,21 @@ export class Cell {
         }
         */
 
+    }
+
+    _handleCellContetChange(){
+        _this.sheet.inputValue.value = _this.element.textContent;
+    }
+
+    _handleCellKeyDownChange(evt){
+        let _this = this;
+        if(evt.key === 'Enter'){
+            evt.preventDefault();
+            //Apply formats
+
+            //Change selectedCell
+            _this.sheet.setSelection(_this.row+1, _this.col);
+        }
     }
 
 }

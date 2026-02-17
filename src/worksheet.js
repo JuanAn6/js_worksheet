@@ -32,7 +32,6 @@ export class Worksheet {
         this.selectedCell = this.cells.get('0:0');
         this.selectedCell.element.classList.add('selected');
 
-        
     }
 
     _key(row, col) {
@@ -73,11 +72,15 @@ export class Worksheet {
         if(cell){
             cell.setValue(value)
         }
-
     }
 
     getCell(row, col) {
         return this.cells.get(this._key(row, col)) ?? null;
+    }
+
+    setSelection(row, col, rowEnd = null, colEnd = null){
+        let cell = this.cells.get(this._key(row,col));
+        if(cell) cell._selectCell();
     }
 
     render(){
