@@ -88,9 +88,11 @@ body{
     left:0px;
     height: 100%;
     min-width: 100%;
-
+    padding-top: 4px;
+    padding-left: 2px;
+    box-sizing: border-box;
     background-color: white;
-    box-shadow: inset 0 0 0 2px rgb(0, 123, 255);
+    box-shadow: inset 0 0 0 1px rgb(0, 123, 255);
 }
 
 .worksheet table td .cell-content{
@@ -118,7 +120,6 @@ body{
     margin: 5px;
 }
 
-
 .worksheet .input-container .input-value:focus-visible {
     outline: none;
 }
@@ -127,12 +128,9 @@ body{
     min-width: 50px;
     width: 100%;
     min-width: 22px;
-
     justify-content: center;
     align-items: center;
-
     border:none;
-
     height: 25px;   
 }
 
@@ -140,9 +138,13 @@ body{
     border: none;
     margin: 2px;
     width: fit-content;
-    width: 55px;
+    min-width: 55px;
+    width: 5ch;
     height: 18px;
 }
 .worksheet .cell-content input:focus-visible {
+    outline: none;
+}
+.worksheet .cell-content:focus-visible {
     outline: none;
 }

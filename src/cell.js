@@ -14,12 +14,14 @@ export class Cell {
         this.element = element;
         this.element.parentElement.addEventListener('click',()=>{
             if(_this.sheet.selectedCell == _this) return;
+            
+            _this.sheet.selectedCell.toggleActive(false);
+
             let items = Array.from(document.querySelectorAll('.worksheet table td.selected'));
             for(let i = 0; i < items.length; i++){
                 items[i].classList.remove('selected');
             }
-            
-            _this.sheet.selectedCell.toggleActive(false);
+
             _this.element.parentElement.classList.add('selected');
             _this.sheet.selectedCell = _this;
             _this.sheet.inputValue.value = _this.value;
@@ -36,6 +38,19 @@ export class Cell {
 
     toggleActive(active){
         let _this = this;
+        // Contenteditable method
+        if(active){
+            _this.element.contentEditable = 'true';
+            _this.element.addEventListener("input", () => {
+                _this.sheet.inputValue.value = _this.element.textContent;
+            });
+            _this.element.classList.add('inside_cell_input');
+            _this.element.focus();
+        }else{
+            _this.element.contentEditable = 'false';
+        }
+        //Input method
+        /*
         if(active){
             let input = document.createElement('input');
             input.type = 'text';
@@ -51,6 +66,7 @@ export class Cell {
                 input.remove();
             }
         }
+        */
 
     }
 
