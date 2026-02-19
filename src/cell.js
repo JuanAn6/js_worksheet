@@ -9,6 +9,10 @@ export class Cell {
         this.element = null;
     }
 
+    /**
+     * Save the dom element and adds the click function
+     * @param {*} element 
+     */
     setElement(element){
         let _this = this;
         this.element = element;
@@ -17,6 +21,9 @@ export class Cell {
         });
     }
 
+    /**
+     * Turns the cell as selected
+     */
     _selectCell(){
         let _this = this;
         if(_this.sheet.selectedCell == _this) return;
@@ -36,11 +43,19 @@ export class Cell {
         _this.sheet.onSelectCell(this.sheet, _this);
     }
 
+    /**
+     * Set value and save it
+     * @param {*} value 
+     */
     setValue(value){
         this.value = value;
         this.element.textContent = value;
     }
 
+    /**
+     * Manage the input of text in the selected cell
+     * @param {*} active 
+     */
     toggleActive(active){
         let _this = this;
         // Contenteditable method
@@ -75,11 +90,19 @@ export class Cell {
 
     }
 
+    /**
+     * Changes the raw (global) input value
+     */
     _handleCellContetChange(){
         let _this = this;
         _this.sheet.inputValue.value = _this.element.textContent;
     }
 
+    /**
+     * Hnadle different keys actions
+     * - Enter: while editing a cell changes to the under one
+     * @param {*} evt 
+     */
     _handleCellKeyDownChange(evt){
         let _this = this;
         if(evt.key === 'Enter'){
